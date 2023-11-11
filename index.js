@@ -32,6 +32,7 @@ async function run() {
     await client.connect();
 
     const serviceCollection = client.db('carServicing').collection('services');
+    const bookingCollection = client.db('carServicing').collection('bookings');
 
     // getting all data from server
     app.get('/services', async (req, res) => {
@@ -51,6 +52,32 @@ async function run() {
       const result = await serviceCollection.findOne(query, options);
       res.send(result);
     })
+
+    // bookings related api
+
+    app.post('/bookings', async (req, res) =>{
+      const booking = req.body;
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
