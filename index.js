@@ -47,7 +47,7 @@ async function run() {
       const  query = { _id : new ObjectId(id) };
       const options = {
       // to get some data from lots of data. if need then have to write 1 if not then 0
-      projection: { title: 1, price: 1, service_id: 1 },
+      projection: { title: 1, price: 1, service_id: 1, img: 1 },
     };
       const result = await serviceCollection.findOne(query, options);
       res.send(result);
@@ -55,13 +55,22 @@ async function run() {
 
     // bookings related api
 
+    app.get('/bookings', async (req, res) => {
+      console.log(req.query.email);
+      let query = {};
+      if (req.query?.email){
+        query = { email : req.query.email }
+      }
+      const result = await bookingCollection.find().toArray();
+      res.send(result);
+    })
+
     app.post('/bookings', async (req, res) =>{
       const booking = req.body;
       const result = await bookingCollection.insertOne(booking);
       res.send(result);
       console.log(booking)
     })
-
 
 
 
