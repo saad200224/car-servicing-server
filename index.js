@@ -45,6 +45,7 @@ async function run() {
       res.send(token)
     })
 
+
     // service related api
     // getting all data from server
     app.get('/services', async (req, res) => {
@@ -52,6 +53,7 @@ async function run() {
         const result = await cursor.toArray();
         res.send(result);
     })
+
 
     // getting specific one data from server
     app.get('/services/:id', async (req, res) => {
@@ -65,6 +67,7 @@ async function run() {
       res.send(result);
     })
 
+
     // bookings related api
 
     app.get('/bookings', async (req, res) => {
@@ -77,12 +80,14 @@ async function run() {
       res.send(result);
     })
 
+
     app.post('/bookings', async (req, res) =>{
       const booking = req.body;
       const result = await bookingCollection.insertOne(booking);
       res.send(result);
       console.log(booking)
     })
+
 
     app.patch('/bookings/:id', async (req, res) =>{
       const id = req.params.id;
@@ -98,32 +103,13 @@ async function run() {
       res.send(result)
     })
 
+
     app.delete('/bookings/:id', async (req, res) => {
       const id = req.params.id;
       const  query = { _id : new ObjectId(id) }
       const result = await bookingCollection.deleteOne(query)
       res.send(result);
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // Send a ping to confirm a successful connection
